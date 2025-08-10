@@ -21,7 +21,7 @@ const CompanyDashboard = ({ companyId }) => {
       setLoading(true);
       setError('');
       
-      const response = await axios.get(`http://localhost:5000/api/dashboard/company/${companyId}`);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/dashboard/company/${companyId}`);
       console.log('Company dashboard response:', response.data);
       setDashboardData(response.data.data);
       
@@ -41,7 +41,7 @@ const CompanyDashboard = ({ companyId }) => {
       setFilterLoading(true);
       setError('');
       
-      const response = await axios.get(`http://localhost:5000/api/dashboard/filter`, {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/dashboard/filter`, {
         params: {
           start_date: dateRange.startDate,
           end_date: dateRange.endDate,

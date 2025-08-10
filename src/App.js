@@ -14,6 +14,8 @@ import CompanyPage from "./components/CompanyPage";
 import AddCompanyStock from "./components/AddCompanyStock";
 import SaleCompanyStock from "./components/SaleCompanyStock";
 import Dashboard from "./components/Dashboard";
+import InventoryPage from "./components/InventoryPage";
+import AddInventoryPage from "./components/AddInventoryPage";
 
 function App() {
   const [stocks, setStocks] = useState([]);
@@ -23,7 +25,7 @@ function App() {
 
   const fetchStocks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/stocks/get-stock");
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/stocks/get-stock`);
       setStocks(res.data.data);
 
       const sortedStocks = [...res.data.data].sort(
@@ -51,18 +53,18 @@ function App() {
   }, []);
 
   const addStock = async (data) => {
-    await axios.post("http://localhost:5000/api/stocks/add-stock", data);
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/api/stocks/add-stock`, data);
     fetchStocks();
   };
 
   const deleteStock = async (id) => {
-    await axios.delete(`http://localhost:5000/api/stocks/delete-stock/${id}`);
+    await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/stocks/delete-stock/${id}`);
     fetchStocks();
   };
 
   const updateStock = async (id, data) => {
     await axios.put(
-      `http://localhost:5000/api/stocks/update-stock/${id}`,
+      `${process.env.REACT_APP_BASE_URL}/api/stocks/update-stock/${id}`,
       data
     );
     setEditingStock(null);
@@ -111,6 +113,7 @@ function App() {
                 path="/sale-company-stock"
                 element={<SaleCompanyStock />}
               />
+              <Route path="/stocks-management" element={<InventoryPage />} />
               <Route
                 path="/stocks"
                 element={
@@ -134,6 +137,7 @@ function App() {
                   </>
                 }
               />
+              <Route path="/new" element={<AddInventoryPage />} />
             </Routes>
           </Container>
         </div>

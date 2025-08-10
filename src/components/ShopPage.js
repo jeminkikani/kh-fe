@@ -9,7 +9,7 @@ function ShopPage() {
   const [showModal, setShowModal] = useState(false);
 
   const fetchShops = async () => {
-    const res = await axios.get('http://localhost:5000/api/shops/get-shops');
+    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/shops/get-shops`);
     setShops(res.data.data || res.data);
   };
 
@@ -18,7 +18,7 @@ function ShopPage() {
   }, []);
 
   const handleAddShop = async (shop) => {
-    await axios.post('http://localhost:5000/api/shops/add-shop', shop);
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/api/shops/add-shop`, shop);
     fetchShops();
   };
 

@@ -20,7 +20,7 @@ const AllCompaniesDashboard = () => {
       setLoading(true);
       setError('');
       
-      const response = await axios.get('http://localhost:5000/api/dashboard');
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/dashboard`);
       console.log('Dashboard response:', response.data);
       setDashboardData(response.data.data);
       
@@ -37,7 +37,7 @@ const AllCompaniesDashboard = () => {
       setFilterLoading(true);
       setError('');
       
-      const response = await axios.get('http://localhost:5000/api/dashboard/filter', {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/dashboard/filter`, {
         params: {
           start_date: dateRange.startDate,
           end_date: dateRange.endDate

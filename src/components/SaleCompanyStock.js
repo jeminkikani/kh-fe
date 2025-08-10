@@ -34,7 +34,7 @@ const SaleCompanyStock = () => {
   const fetchSaleEntries = async () => {
     try {
       setFetching(true);
-      const response = await axios.get('http://localhost:5000/api/sale-company-stock/get-sale-company-stock');
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/sale-company-stock/get-sale-company-stock`);
       console.log(response.data);
       
       setSaleEntries(response.data.saleCompanyStock || []);
@@ -79,7 +79,7 @@ const SaleCompanyStock = () => {
     setSuccess('');
 
     try {
-      await axios.post('http://localhost:5000/api/sale-company-stock/add-sale-company-stock', formData);
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/sale-company-stock/add-sale-company-stock`, formData);
       setSuccess('Sale entry added successfully!');
       
       setFormData({
@@ -102,7 +102,7 @@ const SaleCompanyStock = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this sale entry?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/sale-company-stock/delete-sale-company-stock/${id}`);
+        await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/sale-company-stock/delete-sale-company-stock/${id}`);
         setSuccess('Sale entry deleted successfully!');
         fetchSaleEntries();
       } catch (error) {
